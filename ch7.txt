@@ -1,0 +1,30 @@
+1. Channel 代表了一个与硬件设备、文件、网络Socket、应用程序组件或其他能够进行读写的实体
+   的打开的连接
+   
+2. Channel
+     |-WritableByteChannel
+     |-ReadableByteChannel
+
+3. Scatter/Gather I/O
+   Vectored I/O
+
+   将多个Buffer中的数据写入到一个目的地、从Channel中读取的数据填充多个Buffer
+
+4. FileInputStream#getChannel() 是read only的
+   FileOutputStream#getChannel()是write only的
+   
+5. Channel是线程安全的
+
+6. FileLock 从一个文件的特定位置开始, 有一个长度.
+   |-exclusive 只允许一个进程写
+   |-shared    允许多个进程读
+   
+   tryLock
+
+7. 将文件映射到内存
+
+    MappedByteBuffer buffer = FileChannel#map(mode, start, length)
+    没有unmap方法, 直到该buffer被GC或者应用程序终止
+
+8. DatagramChannel 既可以做服务端也可以做客户端
+   做服务端时需要绑定ip和端口

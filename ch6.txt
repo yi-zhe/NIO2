@@ -1,0 +1,32 @@
+1. NIO基于Buffer
+2. Buffer的四个属性
+   - 容量 buffer中存储数据项的总数
+   - 限制 从0开始计数, 第一个不能被读写的index
+   - 位置 从0开始计数, 下一个被读写的index
+   - mark 调用reset后position的位置
+   
+   0 <= mark <= position <= limit <= capacity
+   
+3. 调用allocate() 和 wrap() 创建的buffer都是nondirect的
+   这种类型的Buffer背后都有个byte[]
+   
+4. 通过Buffer.duplicate()方法创建一个Buffer的视图
+   修改视图同样会修改原Buffer, 它们共享背后的byte[]
+   可以通过调用asReadOnlyBuffer()创建一个只读视图
+
+5. Buffer的读写, 以ByteBuffer为例
+   put(byte b)              把b写入当前position, 然后将position加1
+   put(int index, byte b)   修改index处的byte为b
+   get()                    读取当前position处的值, 然后将position加1
+   get(int index)           读取index处的值
+   
+6. 为了提高效率
+   可以使用
+   put(byte[] src)
+   put(byte[] src, int offset, int length)
+   get(byte[] dst)
+   get(byte[] dst, int offset, int length)
+   进行批量操作
+   
+7. Direct Buffer效率更高, 但申请内存时更加昂贵.
+   当代码已经可以正常用Buffer工作时, 可以简单的替换为allocateDirect来使用Direct Buffer

@@ -1,0 +1,10 @@
+1. Selector维护一组Channel, 并且检测这些Channel
+   哪一个已经做好了读取、写入、建立连接等等.
+   这些工作实际上是通过操作系统的POSIX select()系统调用或者其他系统调用实现的.
+   
+2. Selector只能处理SelectableChannel的子类对象
+
+3. Selector每注册一个Channel就会返回一个SelectionKey对象
+   SelectionKey维护两个集合
+   1. 该Channel对哪些事件感兴趣
+   2. 该Channel已经准备好的

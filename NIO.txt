@@ -1,0 +1,37 @@
+CH1
+1. try-with-resources JDK-7
+
+=================================================
+CH3
+
+1. RandomAccessFile
+
+=================================================
+CH4
+
+1. FileInputStream FileOutputStream
+2. PipedInputStream PipedOutputStream 
+   communication between threads.
+   
+3. FilterOutputSream/FilterInputSteam
+   对传输过程中的字节流做一些处理, 如压缩/解压缩 加密/解密 改变字节流的顺序等
+   
+4. FileInputStream/FileOutputStream有性能问题, 没有缓冲
+   FileInputStream.read()和FileOutputStream.write()
+   的每一次调用都会调用到底层文件系统中的函数, 会导致IO缓慢.
+   
+5. Java对象的序列化和反序列化
+   默认的
+       实现Serializable接口
+       writeObject不会序列化静态变量和显示声明为transient的实例变量
+       每一个序列化的对象都有一个标识, 反序列化时会和类文件对比, 如果不一致则不能反序列化
+       每次对类进行修改后, 需要重新生成SUID(Stream Unique Identifier)
+   自定义的
+       提供私有的readObject和writeObject方法避免JVM进行默认的序列化/反序列化操作.
+   扩展的(externalization)
+   
+5. BufferedInputStream/BufferedOutputStream 使用了java缓冲区缓解上述问题
+
+6. DataInputStream/DataOutputStream 提供了对于基本数据类型(integer/string)的输入输出流
+
+7. Externalizable 通过让用户控制序列化和反序列化的细节, 提高了基于反射的序列化和反序列化的性能
